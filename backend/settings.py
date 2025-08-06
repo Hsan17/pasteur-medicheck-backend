@@ -7,7 +7,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # === DEBUG ===
 DEBUG = True
-ALLOWED_HOSTS = ['pasteur-medicheck-backend.onrender.com']
+ALLOWED_HOSTS = ['pasteur-medicheck-backend.onrender.com', '127.0.0.1', 'localhost']
+
 
 # === ENV ===
 load_dotenv()
