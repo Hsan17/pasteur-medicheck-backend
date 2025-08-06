@@ -1,10 +1,10 @@
 services:
-  - type: web
+  - type: web                      # 🟢 Crée un web service
     name: pasteur-medicheck-backend
-    env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python manage.py runserver 0.0.0.0:10000"
+    env: python                    # 🐍 C'est un projet Python (Django)
+    buildCommand: "pip install -r requirements.txt"      # 📦 Installe les dépendances
+    startCommand: "gunicorn backend.wsgi:application --bind 0.0.0.0:10000"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: backend.settings
-    plan: free
+        value: backend.settings     # ⚙️ Spécifie où sont tes settings
+    plan: free                      # 💸 Utilise le plan gratuit
