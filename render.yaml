@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: pasteur-medicheck-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python manage.py runserver 0.0.0.0:10000"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: backend.settings
+    plan: free
