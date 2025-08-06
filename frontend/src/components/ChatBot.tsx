@@ -11,6 +11,12 @@ interface Message {
   timestamp: Date;
 }
 
+// 👇 Gestion dynamique de l'URL backend
+const baseURL =
+  window.location.hostname === 'localhost'
+    ? 'http://localhost:8000'
+    : 'https://pasteur-medicheck-backend.onrender.com'; // 🔁 adapte si backend ailleurs
+
 export const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -39,7 +45,7 @@ export const ChatBot = () => {
     setIsTyping(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/chat/`, {
+      const response = await fetch(`${baseURL}/api/chat/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,9 +107,7 @@ export const ChatBot = () => {
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`flex gap-3 animate-slide-up ${
-              msg.isBot ? "justify-start" : "justify-end"
-            }`}
+            className={`flex gap-3 animate-slide-up ${msg.isBot ? "justify-start" : "justify-end"}`}
           >
             {msg.isBot && (
               <div className="w-8 h-8 bg-pasteur-mint rounded-full flex items-center justify-center shrink-0">
@@ -174,4 +178,5 @@ export const ChatBot = () => {
     </Card>
   );
 };
+
 

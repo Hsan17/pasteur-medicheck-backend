@@ -13,6 +13,11 @@ const ToxicityAnalysis = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const baseURL =
+    window.location.hostname === 'localhost'
+      ? 'http://localhost:8000'
+      : 'https://pasteur-medicheck-backend.onrender.com'; // 🔁 adapte si besoin
+
   const checkToxicity = async () => {
     if (!drugName.trim()) return;
 
@@ -21,7 +26,7 @@ const ToxicityAnalysis = () => {
     setToxicity(null);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/toxicite/`, {
+      const response = await fetch(`${baseURL}/api/toxicite/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: drugName }),

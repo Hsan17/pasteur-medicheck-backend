@@ -10,6 +10,12 @@ interface MedicamentData {
   [key: string]: string;
 }
 
+// 👇 URL dynamique selon environnement
+const baseURL =
+  window.location.hostname === 'localhost'
+    ? 'http://localhost:8000'
+    : 'https://pasteur-medicheck-backend.onrender.com'; // 🔁 Remplace ceci si ton backend a une autre URL
+
 export const ReportGenerator = () => {
   const [drugName, setDrugName] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -25,7 +31,7 @@ export const ReportGenerator = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/medicaments/${encodeURIComponent(drugName)}`
+        `${baseURL}/api/medicaments/${encodeURIComponent(drugName)}`
       );
 
       if (!response.ok) {
