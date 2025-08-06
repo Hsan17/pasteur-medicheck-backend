@@ -21,7 +21,7 @@ const ToxicityAnalysis = () => {
     setToxicity(null);
 
     try {
-      const response = await fetch('/api/toxicite/', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/toxicite/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: drugName }),

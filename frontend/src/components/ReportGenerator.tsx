@@ -24,7 +24,10 @@ export const ReportGenerator = () => {
     setData(null);
 
     try {
-      const response = await fetch(`/api/medicaments/${encodeURIComponent(drugName)}`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/medicaments/${encodeURIComponent(drugName)}`
+      );
+
       if (!response.ok) {
         const errorJson = await response.json();
         throw new Error(errorJson.error || 'Erreur inconnue.');
